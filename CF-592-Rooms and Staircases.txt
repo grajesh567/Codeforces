@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        string a;
+        cin>>a;
+        int ans=INT_MIN;
+        for(int i=0;i<n;++i)
+        {
+            if(a[i]=='1')
+            {
+                ans=max(ans,(n-i)*2);//right circular
+                ans=max(ans,(i+1)*2);//left circular
+                ans=max(ans,n+1);//left+right
+            }
+        }
+        if(ans==INT_MIN) cout<<n;
+        else cout<<ans;
+        cout<<"\n";
+    }
+}
