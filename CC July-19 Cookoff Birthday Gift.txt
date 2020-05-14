@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string a;
+        cin>>a;
+        int n=a.length();
+        int one[n+1],zero[n+1];
+        memset(one,0,sizeof(one));
+        memset(zero,0,sizeof(zero));
+        int ans=0;
+        one[0]=zero[0]=0;
+        for(int i=0;i<n;++i)
+        {
+                if(a[i]=='0') zero[i+1]=1+zero[i],one[i+1]=one[i];
+                else one[i+1]=1+one[i],zero[i+1]=zero[i];
+        }
+        int cnt=1;
+        int temp=cnt*cnt+cnt;
+        while(temp<=n)
+        {
+            for(int i=0;i<=n-temp;++i)
+            {
+                int z=zero[i+temp]-zero[i];//i+cnt-1 andi-1
+                int o=one[i+temp]-one[i];
+                if(z==o*o) ++ans;
+            }
+            ++cnt;
+            temp=cnt*cnt+cnt;
+        }
+        cout<<ans<<"\n";
+    }
+}
+
