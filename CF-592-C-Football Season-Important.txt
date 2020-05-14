@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main()
+{
+   ll n,p,w,d;
+   cin>>n>>p>>w>>d;
+   //SOLN From tutorial
+   if(p%(__gcd(w,d))==0)
+   {
+       bool ans=false;
+       for(ll i=0;i<=w-1&&i*d<=p;++i)
+       {
+           ll draw=i*d;
+           if((p-draw)%w==0&&i+(p-draw)/w<=n)
+           {
+               cout<<(p-draw)/w<<" "<<i<<" "<<n-i-(p-draw)/w;
+               ans=true;
+               break;
+           }
+       }
+
+       if(ans==false) cout<<"-1";
+   }
+   else
+    cout<<"-1";
+}
+Read from Codeforces tutorial 
+In easy language jaise hi draw w k barbar hota h to win me d bhej do to draw vapis 0 ho jayega because:-w draws is equivalent 
+to d wins
