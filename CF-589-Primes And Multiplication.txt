@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int mod=1e9+7;
+#define ll long long
+ll power(ll x, ll y, int p)
+{
+    ll res = 1;     // Initialize result
+ 
+    x = x % p; // Update x if it is more than or
+                // equal to p
+ 
+    if (x == 0) return 0; // In case x is divisible by p;
+ 
+    while (y > 0)
+    {
+        // If y is odd, multiply x with result
+        if (y & 1)
+            res = (res*x) % p;
+ 
+        // y must be even now
+        y = y>>1; // y = y/2
+        x = (x*x) % p;
+    }
+    return res;
+}
+vector<ll> primedivisors(ll n)
+{
+    vector<ll> v;
+    for(ll i=2;i<=sqrt(n);++i)
+    {
+        if(n%i==0)
+        {
+            while(n%i==0) n/=i;
+            v.push_back(i);
+        }
+    }
+    if(n>1) v.push_back(n);
+    return v;
+}
+int main()
+{
+    //SOLN is like this suppose n=12 and 2 and 3 are prime divisors...
+    //for 12 value of functions from 1 to 12 are 1*2*3*4*6*8*9*2*12
+    //so from 1 to 12 how many numbers have 2 will be equal to 12/2..now how man numbers 
+    //have 4 this will (12/2)/2..and how many numbers have 8 ((12/2)/2)/2..so this is for 2 similar for 3..
+    ll x,n;
+    cin>>x>>n;
+    vector<ll> p=primedivisors(x);
+    ll ans=1;
+    for(ll i:p)
+    {
+        ll cnt=0,temp=n;
+        while(temp/i!=0)//how many i in every number
+        {
+            cnt+=(temp/i);
+            temp/=i;
+        }
+        ans*=power(i,cnt,mod);
+        ans%=mod;
+    }
+    cout<<ans<<"\n";
+}

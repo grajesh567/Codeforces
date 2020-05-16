@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool distinct(int n)
+{
+    set<int> s;
+    int temp;
+    while(n!=0)
+    {
+        temp=n%10;
+        if(s.find(temp)!=s.end())
+            return false;
+        s.insert(temp);
+        n/=10;
+    }
+    return true;
+}
+int main()
+{
+    int l,r;
+    cin>>l>>r;
+    int i;
+    for(i=l;i<=r;++i)
+    {
+        if(distinct(i))
+        {
+            cout<<i;
+            break;
+        }
+    }
+    if(i==r+1) cout<<"-1";
+}
