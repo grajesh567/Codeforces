@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool ispresent(int sum[],int n,int des)
+{
+    int i=0,j=1;
+    while(i<n&&j<n)
+    {
+        if(i!=j&&sum[j]-sum[i]==des)
+            return true;
+        if(sum[j]-sum[i]<des) ++j;
+        else ++i;
+
+    }
+    return false;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    ios_base::sync_with_stdio(false);
+    cout.tie(NULL);
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int arr[n];
+        for(int i=0;i<n;++i) cin>>arr[i];
+        int ans1=0,sum=0,ans2=0;
+        for(int i=0;i<n;++i)
+        {
+            sum+=arr[i];
+            if(arr[i]==1)
+                ans1=sum;//jaise hi 1 aata h sum tak ki saari value possible ho jaati h observe karo
+            else
+                ++ans1;
+        }
+        sum=0;
+        for(int i=n-1;i>=0;--i)
+        {
+            sum+=arr[i];
+            if(arr[i]==1)
+                ans2=sum;
+            else
+                ++ans2;
+        }
+        cout<<max(ans1,ans2)<<"\n";
+    }
+
+}
